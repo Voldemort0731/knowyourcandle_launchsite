@@ -170,7 +170,7 @@ export const Compare = ({
           transition={{ duration: 0 }}
         >
           {showHandlebar && (
-            <div className="absolute -right-1.5 top-1/2 z-30 h-5 w-[6px] -translate-y-1/2 rounded-full border border-white/70 bg-black/90" />
+            <div className="absolute -right-1.5 top-1/2 z-30 h-5 w-[6px] -translate-y-1/2 rounded-full border border-black/20 bg-white/90 shadow-[0_0_10px_rgba(0,0,0,0.3)]" />
           )}
         </motion.div>
       </AnimatePresence>

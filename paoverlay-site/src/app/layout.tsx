@@ -4,8 +4,8 @@ import { GoogleProvider } from "@/components/google-provider";
 import { AuthProvider } from "@/components/auth-provider";
 
 export const metadata: Metadata = {
-  title: "PAoverlay Pattern Library",
-  description: "A draggable display of 23 live candlestick patterns.",
+  title: "Know your candle",
+  description: "Advanced pattern library for traders.",
 };
 
 export default function RootLayout({

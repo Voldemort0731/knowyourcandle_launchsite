@@ -66,7 +66,7 @@ export default function Home() {
     <main className="min-h-screen bg-black text-[#c8d1dc]">
       <header className="sticky top-0 z-50 flex h-[60px] items-center justify-between border-b border-white/10 bg-black px-5 md:px-12">
         <div className="flex items-center gap-1 text-[15px] font-semibold tracking-[0.02em] text-white">
-          <span className="text-[#137d57]">PA</span>overlay
+          <span className="text-[#137d57]">Know</span> your candle
         </div>
         <div className="flex items-center gap-5">
           <HeaderProfile />
@@ -282,7 +282,7 @@ export default function Home() {
 
       <footer className="flex flex-wrap items-center justify-between gap-5 border-t border-white/10 px-5 py-10 md:px-12">
         <div className="text-[12px] font-light text-[#47566a]">
-          PAoverlay - For TradingView traders
+          Know your candle - For TradingView traders
         </div>
         <div className="flex gap-6">
           <a className="font-mono text-[11px] text-[#47566a] transition hover:text-white" href="#">
@@ -293,7 +293,7 @@ export default function Home() {
           </a>
           <a
             className="font-mono text-[11px] text-[#47566a] transition hover:text-white"
-            href="mailto:support@paoverlay.in"
+            href="mailto:support@knowyourcandle.com"
           >
             Support
           </a>
