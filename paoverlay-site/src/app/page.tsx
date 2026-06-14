@@ -5,6 +5,9 @@ import CompareDemo from "@/components/compare-demo";
 import InfiniteMovingCardsDemo from "@/components/infinite-moving-cards-demo";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
+import { StepCarousel } from "@/components/step-carousel";
+import { GoogleLoginButton } from "@/components/google-login-button";
+import { HeaderProfile } from "@/components/header-profile";
 
 const ticks = [
   { s: "RELIANCE", p: "2,847.50", c: "+1.24%", u: true },
@@ -19,32 +22,6 @@ const ticks = [
   { s: "LTIM", p: "5,234.40", c: "-0.74%", u: false },
 ];
 
-const steps = [
-  {
-    num: "01",
-    label: "INSTALL",
-    title: "Add to Chrome",
-    desc: "Install from the Chrome Web Store and subscribe with Google. Takes under two minutes.",
-  },
-  {
-    num: "02",
-    label: "OPEN",
-    title: "Load any chart",
-    desc: "Navigate to any symbol on TradingView. The overlay activates without any configuration.",
-  },
-  {
-    num: "03",
-    label: "DETECT",
-    title: "Markers render",
-    desc: "Pattern markers appear on every detected candle, refreshing every 15s during market hours.",
-  },
-  {
-    num: "04",
-    label: "TUNE",
-    title: "Filter the noise",
-    desc: "Toggle bullish, bearish, or neutral. Adjust doji sensitivity and wick multiplier from the popup.",
-  },
-];
 
 const pricingFeatures = [
   "All 23 candlestick patterns",
@@ -92,16 +69,7 @@ export default function Home() {
           <span className="text-[#137d57]">PA</span>overlay
         </div>
         <div className="flex items-center gap-5">
-          <div className="flex items-center gap-2 rounded border border-[#137d57]/30 bg-[#137d57]/12 px-3 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-[#137d57]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#137d57] animate-pulse" />
-            LIVE
-          </div>
-          <a
-            href="#pricing"
-            className="rounded-md border border-white bg-white px-4 py-2 text-[13px] font-semibold text-[#090c0f] transition hover:bg-transparent hover:text-white"
-          >
-            Get started
-          </a>
+          <HeaderProfile />
         </div>
       </header>
 
@@ -258,34 +226,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="how" className="border-b border-white/10 bg-black px-5 py-24 md:px-12">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-[#137d57]">
-            How it works
-          </p>
-          <h2 className="text-[clamp(24px,3vw,40px)] font-light tracking-[-0.01em] text-white md:text-[40px]">
-            Open TradingView. Patterns appear.
-          </h2>
-          <div className="mt-12 grid overflow-hidden rounded-md border border-white/10 bg-black md:grid-cols-2 xl:grid-cols-4">
-            {steps.map((step) => (
-              <div
-                key={step.num}
-                className="border-b border-white/10 bg-black p-8 last:border-b-0 md:border-r md:last:border-r-0 xl:border-b-0 xl:last:border-r-0"
-              >
-                <div className="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#137d57]">
-                  {step.num} - {step.label}
-                </div>
-                <div className="mb-2 text-[18px] font-normal text-white">
-                  {step.title}
-                </div>
-                <div className="text-[13.5px] font-light leading-[1.6] text-[#7e8fa3]">
-                  {step.desc}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StepCarousel />
 
       <section id="pricing" className="relative bg-black px-5 py-24 md:px-12">
         <div className="mx-auto max-w-7xl">
@@ -328,14 +269,8 @@ export default function Home() {
               <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#47566a]">
                 Sign in to subscribe
               </div>
-              <div className="mt-4 flex items-center gap-2 rounded-md border border-white/10 bg-white px-4 py-3 text-[13px] font-semibold text-[#090c0f]">
-                <svg width="14" height="14" viewBox="0 0 18 18" aria-hidden="true">
-                  <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" />
-                  <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z" />
-                  <path fill="#FBBC05" d="M3.964 10.706c-.18-.54-.282-1.117-.282-1.706s.102-1.166.282-1.706V4.962H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.038l3.007-2.332z" />
-                  <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.962L3.964 7.294C4.672 5.167 6.656 3.58 9 3.58z" />
-                </svg>
-                Continue with Google
+              <div className="mt-4">
+                <GoogleLoginButton />
               </div>
               <div className="mt-4 text-center font-mono text-[11px] text-[#47566a]">
                 Sign in - subscribe - install - trade
