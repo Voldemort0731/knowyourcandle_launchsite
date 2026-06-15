@@ -66,7 +66,7 @@ export default function Home() {
     <main className="min-h-screen bg-black text-[#c8d1dc]">
       <header className="sticky top-0 z-50 flex h-[60px] items-center justify-between border-b border-white/10 bg-black px-5 md:px-12">
         <div className="flex items-center gap-1 text-[15px] font-semibold tracking-[0.02em] text-white">
-          <span className="text-[#137d57]">Know</span> your candle
+          Know your candle
         </div>
         <div className="flex items-center gap-5">
           <HeaderProfile />
