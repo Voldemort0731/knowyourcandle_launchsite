@@ -143,15 +143,15 @@ export default function Home() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
                   href="#pricing"
-                  className="rounded-[5px] border border-[#137d57] bg-[#137d57] px-6 py-3 text-[13px] font-semibold text-white transition hover:bg-[#0f6345]"
+                  className="rounded-[6px] border border-[#137d57] bg-[#137d57] px-8 py-3.5 text-[14px] font-semibold text-white shadow-[0_0_20px_rgba(19,125,87,0.2)] transition-all duration-300 hover:scale-[1.02] hover:bg-[#0f6345] hover:shadow-[0_0_30px_rgba(19,125,87,0.4)]"
                 >
-                  Start for Rs299/mo
+                  Get Started for Rs899/mo
                 </a>
                 <a
                   href="#patterns"
-                  className="rounded-[6px] border border-white/20 bg-transparent px-6 py-3 text-[13px] font-medium text-[#c8d1dc] transition hover:border-[#7e8fa3] hover:bg-white/[0.02] hover:text-white"
+                  className="rounded-[6px] border border-white/20 bg-transparent px-8 py-3.5 text-[14px] font-medium text-[#c8d1dc] transition-all duration-300 hover:border-white/40 hover:bg-white/[0.03] hover:text-white"
                 >
-                  See all 23 patterns
+                  View live patterns
                 </a>
               </div>
             </div>
@@ -247,7 +247,7 @@ export default function Home() {
                 <sup className="mr-1 mt-2 text-[20px] font-medium text-[#7e8fa3]">
                   Rs
                 </sup>
-                299
+                899
               </div>
               <div className="mb-8 mt-2 font-mono text-[11px] uppercase tracking-[0.05em] text-[#47566a]">
                 per month - cancel any time
