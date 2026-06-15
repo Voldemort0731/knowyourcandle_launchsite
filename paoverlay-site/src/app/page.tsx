@@ -65,7 +65,8 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-[#c8d1dc]">
       <header className="sticky top-0 z-50 flex h-[60px] items-center justify-between border-b border-white/10 bg-black px-5 md:px-12">
-        <div className="flex items-center gap-1 text-[15px] font-semibold tracking-[0.02em] text-white">
+        <div className="flex items-center gap-2 text-[20px] font-semibold tracking-[0.02em] text-white">
+          <img src="/logo.png" alt="Logo" className="w-6 h-6 object-contain" />
           Know your candle
         </div>
         <div className="flex items-center gap-5">
@@ -143,9 +144,9 @@ export default function Home() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
                   href="#pricing"
-                  className="rounded-[6px] border border-[#137d57] bg-[#137d57] px-8 py-3.5 text-[14px] font-semibold text-white shadow-[0_0_20px_rgba(19,125,87,0.2)] transition-all duration-300 hover:scale-[1.02] hover:bg-[#0f6345] hover:shadow-[0_0_30px_rgba(19,125,87,0.4)]"
+                  className="rounded-[8px] bg-[#00ffa3] px-10 py-4 text-[16px] font-bold text-black shadow-[0_0_20px_rgba(0,255,163,0.3)] transition-all duration-300 hover:scale-[1.03] hover:bg-[#00e592] hover:shadow-[0_0_35px_rgba(0,255,163,0.5)]"
                 >
-                  Get Started for Rs899/mo
+                  Get Started for Rs799/mo
                 </a>
                 <a
                   href="#patterns"
@@ -247,7 +248,7 @@ export default function Home() {
                 <sup className="mr-1 mt-2 text-[20px] font-medium text-[#7e8fa3]">
                   Rs
                 </sup>
-                899
+                799
               </div>
               <div className="mb-8 mt-2 font-mono text-[11px] uppercase tracking-[0.05em] text-[#47566a]">
                 per month - cancel any time
