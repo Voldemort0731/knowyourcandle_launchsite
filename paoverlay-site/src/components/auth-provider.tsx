@@ -35,8 +35,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         // Fetch subscription status from our DB
         let isPro = false;
         try {
-          const subRes = await fetch(`/api/verify-access?email=${encodeURIComponent(userInfo.email)}`, { 
-            cache: 'no-store' 
+          const subRes = await fetch(`/api/verify-access`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: userInfo.email }),
           });
           const subData = await subRes.json();
           isPro = subData.hasAccess;

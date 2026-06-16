@@ -1,7 +1,7 @@
 const https = require('https');
 
 async function checkApi() {
-  const url = 'https://knowyourcandlelaunchsite.vercel.app/api/verify-access?email=owaissayyed2007@gmail.com';
+  const url = 'https://www.knowyourcandle.com/api/verify-access?email=owaissayyed2007@gmail.com';
   
   console.log('Fetching', url);
   
