@@ -37,6 +37,55 @@ export default function Home() {
   const cardRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
 
+  const handlePayment = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: 79900, currency: "INR" })
+      });
+      const order = await res.json();
+      
+      if (!order.order_id) throw new Error("Failed to create order");
+
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: order.currency,
+        name: "Know Your Candle",
+        description: "Monthly Subscription",
+        order_id: order.order_id,
+        handler: async function (response: any) {
+          const verifyRes = await fetch("/api/verify-payment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(response)
+          });
+          const verifyData = await verifyRes.json();
+          if (verifyData.success) {
+            alert("Payment successful! Welcome aboard.");
+          } else {
+            alert("Payment verification failed. Please contact support.");
+          }
+        },
+        theme: {
+          color: "#00ffa3"
+        }
+      };
+      
+      const rzp = new (window as any).Razorpay(options);
+      rzp.on("payment.failed", function (response: any) {
+        console.error("Payment failed", response.error);
+        alert("Payment failed. Please try again.");
+      });
+      rzp.open();
+    } catch (error) {
+      console.error(error);
+      alert("Error initiating payment");
+    }
+  };
+
   useEffect(() => {
     const hero = heroRef.current;
     const card = cardRef.current;
@@ -64,10 +113,10 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-black text-[#c8d1dc]">
-      <header className="sticky top-0 z-50 flex h-[60px] items-center justify-between border-b border-white/10 bg-black px-5 md:px-12">
-        <div className="flex items-center gap-2 text-[20px] font-semibold tracking-[0.02em] text-white">
-          <img src="/logo.png" alt="Logo" className="w-6 h-6 object-contain" />
-          Know your candle
+      <header className="sticky top-0 z-50 flex h-[80px] items-center justify-between border-b border-white/10 bg-black px-5 md:px-12">
+        <div className="flex items-center gap-3 font-canela text-[24px] font-light tracking-normal text-white">
+          <img src="/logo.png" alt="Logo" className="w-14 h-14 object-contain" />
+          Know Your Candle
         </div>
         <div className="flex items-center gap-5">
           <HeaderProfile />
@@ -142,15 +191,15 @@ export default function Home() {
                 they form.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <a
-                  href="#pricing"
-                  className="rounded-[8px] bg-[#00ffa3] px-10 py-4 text-[16px] font-bold text-black shadow-[0_0_20px_rgba(0,255,163,0.3)] transition-all duration-300 hover:scale-[1.03] hover:bg-[#00e592] hover:shadow-[0_0_35px_rgba(0,255,163,0.5)]"
+                <button
+                  onClick={handlePayment}
+                  className="rounded-[8px] bg-[#00ffa3] px-12 py-5 text-[20px] font-bold text-black shadow-[0_0_20px_rgba(0,255,163,0.3)] transition-all duration-300 hover:scale-[1.03] hover:bg-[#00e592] hover:shadow-[0_0_35px_rgba(0,255,163,0.5)]"
                 >
-                  Get Started for Rs799/mo
-                </a>
+                  Get Started for ₹799/mo
+                </button>
                 <a
                   href="#patterns"
-                  className="rounded-[6px] border border-white/20 bg-transparent px-8 py-3.5 text-[14px] font-medium text-[#c8d1dc] transition-all duration-300 hover:border-white/40 hover:bg-white/[0.03] hover:text-white"
+                  className="rounded-[6px] border border-white/20 bg-transparent px-12 py-5 text-[20px] font-medium text-[#c8d1dc] transition-all duration-300 hover:border-white/40 hover:bg-white/[0.03] hover:text-white"
                 >
                   View live patterns
                 </a>
@@ -245,10 +294,7 @@ export default function Home() {
           <div className="mx-auto mt-12 grid max-w-[900px] overflow-hidden rounded-md border border-white/10 bg-black md:grid-cols-[1.1fr_0.9fr]">
             <div className="border-b border-white/10 bg-black p-10 md:border-b-0 md:border-r">
               <div className="flex items-start text-[52px] font-light leading-none text-white">
-                <sup className="mr-1 mt-2 text-[20px] font-medium text-[#7e8fa3]">
-                  Rs
-                </sup>
-                799
+                ₹ 799
               </div>
               <div className="mb-8 mt-2 font-mono text-[11px] uppercase tracking-[0.05em] text-[#47566a]">
                 per month - cancel any time
@@ -281,23 +327,25 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="flex flex-wrap items-center justify-between gap-5 border-t border-white/10 px-5 py-10 md:px-12">
-        <div className="text-[12px] font-light text-[#47566a]">
-          Know your candle - For TradingView traders
+      <footer className="flex flex-col items-center gap-6 border-t border-white/10 px-5 py-10 md:px-12 text-center">
+        <div className="max-w-4xl text-[13px] leading-relaxed text-white">
+          Know Your Candle displays technical indicators on trading charts. We do not provide trading signals, alerts, or financial advice. We do not guarantee the accuracy, availability, or timeliness of any data shown, and we have no access to or control over your trading account, funds, or broker. Use of any third-party platform or service is at your own risk. Trading involves significant risk, including losses greater than your initial investment. We have no access to or control over your capital, funds, or trading account. Trade at your own risk.
         </div>
-        <div className="flex gap-6">
-          <a className="font-mono text-[11px] text-[#47566a] transition hover:text-white" href="#">
-            Privacy
-          </a>
-          <a className="font-mono text-[11px] text-[#47566a] transition hover:text-white" href="#">
-            Terms
-          </a>
-          <a
-            className="font-mono text-[11px] text-[#47566a] transition hover:text-white"
-            href="mailto:support@knowyourcandle.com"
-          >
-            Support
-          </a>
+        <div className="flex flex-col items-center gap-4 text-[13px] text-white">
+          <div>
+            To read the full policies, please click to view our{" "}
+            <a className="underline transition hover:text-gray-300" href="https://drive.google.com/file/d/1EhjsaUFe0YMgLTm07uYvJvk9eUkJx49x/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>
+            {" "}or{" "}
+            <a className="underline transition hover:text-gray-300" href="https://drive.google.com/file/d/1w73VNiycXD9RYhSBoG4MNvhFRmkMo3c0/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+          </div>
+          <div className="flex gap-6">
+            <a
+              className="font-mono text-[13px] text-white transition hover:text-gray-300"
+              href="mailto:fiwbai26@gmail.com"
+            >
+              Contact Support
+            </a>
+          </div>
         </div>
       </footer>
     </main>

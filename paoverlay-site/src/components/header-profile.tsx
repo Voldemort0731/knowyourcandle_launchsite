@@ -33,7 +33,7 @@ export function HeaderProfile() {
     return (
       <button
         onClick={login}
-        className="rounded-md border border-white bg-white px-4 py-2 text-[13px] font-semibold text-[#090c0f] transition hover:bg-transparent hover:text-white"
+        className="rounded-md bg-[#00ffa3] px-4 py-2 text-[13px] font-bold text-black transition hover:bg-[#00e592] hover:shadow-[0_0_15px_rgba(0,255,163,0.4)]"
       >
         Get started
       </button>
