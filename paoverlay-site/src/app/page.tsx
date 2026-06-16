@@ -37,54 +37,6 @@ export default function Home() {
   const cardRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
 
-  const handlePayment = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    try {
-      const res = await fetch("/api/create-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 99900, currency: "INR" })
-      });
-      const order = await res.json();
-
-      if (!order.order_id) throw new Error("Failed to create order");
-
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        amount: order.amount,
-        currency: order.currency,
-        name: "Know Your Candle",
-        description: "Monthly Subscription",
-        order_id: order.order_id,
-        handler: async function (response: any) {
-          const verifyRes = await fetch("/api/verify-payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(response)
-          });
-          const verifyData = await verifyRes.json();
-          if (verifyData.success) {
-            alert("Payment successful! Welcome aboard.");
-          } else {
-            alert("Payment verification failed. Please contact support.");
-          }
-        },
-        theme: {
-          color: "#00ffa3"
-        }
-      };
-
-      const rzp = new (window as any).Razorpay(options);
-      rzp.on("payment.failed", function (response: any) {
-        console.error("Payment failed", response.error);
-        alert("Payment failed. Please try again.");
-      });
-      rzp.open();
-    } catch (error) {
-      console.error(error);
-      alert("Error initiating payment");
-    }
-  };
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -191,12 +143,14 @@ export default function Home() {
                 they form.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <button
-                  onClick={handlePayment}
-                  className="rounded-[8px] bg-[#00ffa3] px-12 py-5 text-[20px] font-bold text-black shadow-[0_0_20px_rgba(0,255,163,0.3)] transition-all duration-300 hover:scale-[1.03] hover:bg-[#00e592] hover:shadow-[0_0_35px_rgba(0,255,163,0.5)]"
+                <a
+                  href="https://rzp.io/rzp/rkqCFb0j"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex rounded-[8px] bg-[#00ffa3] px-12 py-5 text-[20px] font-bold text-black shadow-[0_0_20px_rgba(0,255,163,0.3)] transition-all duration-300 hover:scale-[1.03] hover:bg-[#00e592] hover:shadow-[0_0_35px_rgba(0,255,163,0.5)]"
                 >
                   Get Started for ₹999/mo
-                </button>
+                </a>
                 <a
                   href="#patterns"
                   className="rounded-[6px] border border-white/20 bg-transparent px-12 py-5 text-[20px] font-medium text-[#c8d1dc] transition-all duration-300 hover:border-white/40 hover:bg-white/[0.03] hover:text-white"
@@ -316,8 +270,16 @@ export default function Home() {
               <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#47566a]">
                 Sign in to subscribe
               </div>
-              <div className="mt-4">
+              <div className="mt-4 flex flex-col gap-3">
                 <GoogleLoginButton />
+                <a
+                  href="https://rzp.io/rzp/rkqCFb0j"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2 rounded-md bg-[#00ffa3] px-4 py-2.5 text-sm font-bold text-black transition hover:bg-[#00e592] hover:shadow-[0_0_15px_rgba(0,255,163,0.4)]"
+                >
+                  Subscribe for ₹999/mo
+                </a>
               </div>
               <div className="mt-4 text-center font-mono text-[11px] text-[#47566a]">
                 Sign in - subscribe - install - trade

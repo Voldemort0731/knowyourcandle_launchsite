@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { GoogleProvider } from "@/components/google-provider";
 import { AuthProvider } from "@/components/auth-provider";
-import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Know your candle",
@@ -22,7 +21,6 @@ export default function RootLayout({
             {children}
           </AuthProvider>
         </GoogleProvider>
-        <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
       </body>
     </html>
   );
