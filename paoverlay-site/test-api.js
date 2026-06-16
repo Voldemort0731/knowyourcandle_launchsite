@@ -1,24 +1,40 @@
 const https = require('https');
 
 async function checkApi() {
-  const url = 'https://www.knowyourcandle.com/api/verify-access?email=owaissayyed2007@gmail.com';
-  
-  console.log('Fetching', url);
-  
-  https.get(url, (res) => {
+  const data = JSON.stringify({ email: 'owaissayyed2007@gmail.com' });
+
+  const options = {
+    hostname: 'knowyourcandlelaunchsite.vercel.app',
+    port: 443,
+    path: '/api/verify-access',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': data.length
+    }
+  };
+
+  console.log('Sending POST to https://knowyourcandlelaunchsite.vercel.app/api/verify-access');
+
+  const req = https.request(options, (res) => {
     console.log('Status Code:', res.statusCode);
-    
-    let data = '';
+
+    let responseData = '';
     res.on('data', (chunk) => {
-      data += chunk;
+      responseData += chunk;
     });
-    
+
     res.on('end', () => {
-      console.log('Response Body:', data);
+      console.log('Response Body:', responseData);
     });
-  }).on('error', (err) => {
-    console.log('Error:', err.message);
   });
+
+  req.on('error', (error) => {
+    console.error('Error:', error);
+  });
+
+  req.write(data);
+  req.end();
 }
 
 checkApi();
