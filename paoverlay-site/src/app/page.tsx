@@ -43,10 +43,10 @@ export default function Home() {
       const res = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 79900, currency: "INR" })
+        body: JSON.stringify({ amount: 99900, currency: "INR" })
       });
       const order = await res.json();
-      
+
       if (!order.order_id) throw new Error("Failed to create order");
 
       const options = {
@@ -73,7 +73,7 @@ export default function Home() {
           color: "#00ffa3"
         }
       };
-      
+
       const rzp = new (window as any).Razorpay(options);
       rzp.on("payment.failed", function (response: any) {
         console.error("Payment failed", response.error);
@@ -195,7 +195,7 @@ export default function Home() {
                   onClick={handlePayment}
                   className="rounded-[8px] bg-[#00ffa3] px-12 py-5 text-[20px] font-bold text-black shadow-[0_0_20px_rgba(0,255,163,0.3)] transition-all duration-300 hover:scale-[1.03] hover:bg-[#00e592] hover:shadow-[0_0_35px_rgba(0,255,163,0.5)]"
                 >
-                  Get Started for ₹799/mo
+                  Get Started for ₹999/mo
                 </button>
                 <a
                   href="#patterns"
@@ -294,7 +294,7 @@ export default function Home() {
           <div className="mx-auto mt-12 grid max-w-[900px] overflow-hidden rounded-md border border-white/10 bg-black md:grid-cols-[1.1fr_0.9fr]">
             <div className="border-b border-white/10 bg-black p-10 md:border-b-0 md:border-r">
               <div className="flex items-start text-[52px] font-light leading-none text-white">
-                ₹ 799
+                ₹ 999
               </div>
               <div className="mb-8 mt-2 font-mono text-[11px] uppercase tracking-[0.05em] text-[#47566a]">
                 per month - cancel any time
