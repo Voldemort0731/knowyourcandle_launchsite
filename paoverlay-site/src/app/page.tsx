@@ -8,6 +8,7 @@ import { StarsBackground } from "@/components/ui/stars-background";
 import { StepCarousel } from "@/components/step-carousel";
 import { GoogleLoginButton } from "@/components/google-login-button";
 import { HeaderProfile } from "@/components/header-profile";
+import { useAuth } from "@/components/auth-provider";
 
 const ticks = [
   { s: "RELIANCE", p: "2,847.50", c: "+1.24%", u: true },
@@ -33,6 +34,7 @@ const pricingFeatures = [
 ];
 
 export default function Home() {
+  const { user } = useAuth();
   const heroRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -143,14 +145,20 @@ export default function Home() {
                 they form.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <a
-                  href="https://rzp.io/rzp/rkqCFb0j"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex rounded-[8px] bg-[#00ffa3] px-12 py-5 text-[20px] font-bold text-black shadow-[0_0_20px_rgba(0,255,163,0.3)] transition-all duration-300 hover:scale-[1.03] hover:bg-[#00e592] hover:shadow-[0_0_35px_rgba(0,255,163,0.5)]"
-                >
-                  Get Started for ₹999/mo
-                </a>
+                {user?.isPro ? (
+                  <button className="inline-flex rounded-[8px] bg-white/5 border border-[#00ffa3]/30 px-12 py-5 text-[20px] font-bold text-[#00ffa3] cursor-default">
+                    Pro Plan Active
+                  </button>
+                ) : (
+                  <a
+                    href="https://rzp.io/rzp/rkqCFb0j"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex rounded-[8px] bg-[#00ffa3] px-12 py-5 text-[20px] font-bold text-black shadow-[0_0_20px_rgba(0,255,163,0.3)] transition-all duration-300 hover:scale-[1.03] hover:bg-[#00e592] hover:shadow-[0_0_35px_rgba(0,255,163,0.5)]"
+                  >
+                    Get Started for ₹999/mo
+                  </a>
+                )}
                 <a
                   href="#patterns"
                   className="rounded-[6px] border border-white/20 bg-transparent px-12 py-5 text-[20px] font-medium text-[#c8d1dc] transition-all duration-300 hover:border-white/40 hover:bg-white/[0.03] hover:text-white"
@@ -272,14 +280,20 @@ export default function Home() {
               </div>
               <div className="mt-4 flex flex-col gap-3">
                 <GoogleLoginButton />
-                <a
-                  href="https://rzp.io/rzp/rkqCFb0j"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex w-full items-center justify-center gap-2 rounded-md bg-[#00ffa3] px-4 py-2.5 text-sm font-bold text-black transition hover:bg-[#00e592] hover:shadow-[0_0_15px_rgba(0,255,163,0.4)]"
-                >
-                  Subscribe for ₹999/mo
-                </a>
+                {user?.isPro ? (
+                  <button className="flex w-full items-center justify-center gap-2 rounded-md bg-white/5 border border-[#00ffa3]/30 px-4 py-2.5 text-sm font-bold text-[#00ffa3] cursor-default">
+                    Pro Plan Active
+                  </button>
+                ) : (
+                  <a
+                    href="https://rzp.io/rzp/rkqCFb0j"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-full items-center justify-center gap-2 rounded-md bg-[#00ffa3] px-4 py-2.5 text-sm font-bold text-black transition hover:bg-[#00e592] hover:shadow-[0_0_15px_rgba(0,255,163,0.4)]"
+                  >
+                    Subscribe for ₹999/mo
+                  </a>
+                )}
               </div>
               <div className="mt-4 text-center font-mono text-[11px] text-[#47566a]">
                 Sign in - subscribe - install - trade

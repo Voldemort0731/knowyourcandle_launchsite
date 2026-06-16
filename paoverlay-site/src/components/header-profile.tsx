@@ -49,6 +49,7 @@ export function HeaderProfile() {
         <img
           src={user.picture}
           alt={user.name}
+          referrerPolicy="no-referrer"
           className="h-9 w-9 rounded-full object-cover"
         />
       </button>
@@ -66,6 +67,7 @@ export function HeaderProfile() {
               <img
                 src={user.picture}
                 alt={user.name}
+                referrerPolicy="no-referrer"
                 className="h-10 w-10 rounded-full object-cover"
               />
               <div className="flex flex-col">
@@ -79,14 +81,16 @@ export function HeaderProfile() {
                 Subscription
               </div>
               <div className="flex items-center justify-between rounded-lg bg-white/5 p-3 border border-white/5">
-                <span className="text-sm font-medium text-white">Free Plan</span>
-                <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-white uppercase">
-                  Not Subscribed
+                <span className="text-sm font-medium text-white">{user.isPro ? "Pro Plan" : "Free Plan"}</span>
+                <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${user.isPro ? "bg-[#00ffa3]/20 text-[#00ffa3]" : "bg-white/10 text-white"}`}>
+                  {user.isPro ? "Active" : "Not Subscribed"}
                 </span>
               </div>
-              <a href="#pricing" onClick={() => setIsOpen(false)} className="mt-2 block w-full rounded-md bg-[#137d57] px-3 py-2 text-center text-xs font-semibold text-white transition hover:bg-[#0f6345]">
-                Upgrade to Pro
-              </a>
+              {!user.isPro && (
+                <a href="#pricing" onClick={() => setIsOpen(false)} className="mt-2 block w-full rounded-md bg-[#137d57] px-3 py-2 text-center text-xs font-semibold text-white transition hover:bg-[#0f6345]">
+                  Upgrade to Pro
+                </a>
+              )}
             </div>
 
             <div className="border-t border-white/10 p-2">

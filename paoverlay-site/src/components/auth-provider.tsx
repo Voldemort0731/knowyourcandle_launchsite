@@ -7,6 +7,7 @@ export interface GoogleUser {
   email: string;
   name: string;
   picture: string;
+  isPro?: boolean;
 }
 
 interface AuthContextType {
@@ -31,10 +32,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         );
         const userInfo = await response.json();
         
+        // Fetch subscription status from our DB
+        let isPro = false;
+        try {
+          const subRes = await fetch(`/api/verify-access?email=${encodeURIComponent(userInfo.email)}`);
+          const subData = await subRes.json();
+          isPro = subData.hasAccess;
+        } catch (err) {
+          console.error("Failed to fetch subscription status", err);
+        }
+        
         setUser({
           email: userInfo.email,
           name: userInfo.name,
           picture: userInfo.picture,
+          isPro,
         });
       } catch (err) {
         console.error("Failed to fetch user info", err);
